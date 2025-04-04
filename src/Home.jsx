@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
 
-const App = () => {
+const Home= () => {
   const [allProducts, setAllProducts] = useState([]);
+  // const [loading, setLoading] = useState(false);
+ 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sugarLimit, setSugarLimit] = useState("");
@@ -51,7 +54,7 @@ const App = () => {
     fetchAllProducts();
   }, []);
 
-  // Handles category selection (multi-select)
+  // category selection 
   const toggleCategory = (category) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -60,7 +63,7 @@ const App = () => {
     );
   };
 
-  // Function to handle sorting
+  //  sorting
   const handleSorting = (products, option) => {
     let sortedProducts = [...products];
 
@@ -110,7 +113,7 @@ const App = () => {
     return sortedProducts;
   };
 
-  // Filter and sort products
+  // Filter and sort 
   useEffect(() => {
     let filtered = allProducts;
 
@@ -134,7 +137,7 @@ const App = () => {
       );
     }
 
-    // Apply sorting
+    // sorting
     filtered = handleSorting(filtered, sortOption);
 
     setFilteredProducts(filtered);
@@ -142,8 +145,8 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1>OpenFoodFacts Products</h1>
- {/* Dark Mode Toggle */}
+      <h1>OpenFood Products</h1>
+
  <button className="toggle-theme" onClick={() => setIsDarkMode(!isDarkMode)}>
         {isDarkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
       </button>
@@ -156,8 +159,8 @@ const App = () => {
         className="search-bar"
       />
 
-      {/* Category Filters (Multi-Select) */}
-      <div className="category-filter">
+      {/* Filters  */}
+      <div className="category-filter ">
         {["Beverages", "Dairy", "Snacks", "Bakery", "Frozen"].map((category) => (
           <label key={category}>
             <input
@@ -171,7 +174,7 @@ const App = () => {
       </div>
 
       {/* Sugar Filter */}
-      <div className="filter-section">
+      <div className="filter-section pt-2">
         <label>
           Sugar (g per 100g):
           <input
@@ -183,7 +186,7 @@ const App = () => {
         </label>
       </div>
 
-      {/* Sorting Options */}
+      {/* Sorting  */}
       <select value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
         <option value="">Sort By</option>
         <option value="name_asc">Product Name (A-Z)</option>
@@ -194,7 +197,7 @@ const App = () => {
         <option value="calories_high_low">Calories (Highest to Lowest)</option>
       </select>
 
-      {/* Error Message */}
+      {/* Error  */}
       {errorMessage && <p className="error">{errorMessage}</p>}
 
       {loading ? (
@@ -238,4 +241,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
